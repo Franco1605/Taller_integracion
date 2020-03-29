@@ -1,0 +1,27 @@
+<h1>Aplicación de Rick and Morty</h1>
+
+
+<table style="width:100%">
+  <tr>
+    <th>Id</th>
+    <th>Código del Episodio</th>
+    <th>Nombre del episodio</th>
+    <th>Fecha que estuvo al aire</th>
+  </tr>
+  <%for episodio in @response1['results'] do%>
+    <tr>
+      <td> <%= episodio["id"]%> </td>
+      <td> <%= episodio["episode"]%> </td>
+      <td> <%= link_to episodio["name"], episode_show_path(episodio["id"])%> </td>
+      <td> <%= episodio["air_date"]%> </td>
+    </tr>
+  <% end %>
+  <%for episodio in @response2['results'] do%>
+    <tr>
+      <td> <%= episodio["id"]%> </td>
+      <td> <%= episodio["episode"]%> </td>
+      <td> <%= episodio["name"]%> </td>
+      <td> <%= episodio["air_date"]%> </td>
+    </tr>
+  <% end %>
+</table>

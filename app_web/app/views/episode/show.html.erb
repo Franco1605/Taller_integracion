@@ -1,0 +1,20 @@
+<h1>Este es solo un capítulo</h1>
+
+<table style="width:100%">
+  <tr>
+    <th>Id</th>
+    <th>Código del Episodio</th>
+    <th>Personajes</th>
+  </tr>
+  <tr>
+    <td> <%= @response_episode["id"]%> </td>
+    <td> <%= @response_episode["episode"]%> </td>
+    <td>
+      <%for nombre in @lista_nombres_personajes do %>
+        <ul>
+          <li> <%=nombre %> </li>
+        </ul>
+      <% end %>
+    </td>
+  </tr>
+</table>
