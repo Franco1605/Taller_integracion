@@ -1,0 +1,6 @@
+<%=form_tag "search/create", method: :get, do %>
+    <%=text_field_tag :keyword, nil, placeholder: "Ingresa alguna palabra"%>
+    <%=content_tag :button, type: :submit do%>
+    Buscar
+  <%end%>
+<%end%>

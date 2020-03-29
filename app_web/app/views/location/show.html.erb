@@ -1,0 +1,22 @@
+<h1>Lugar: <%=@response_location["name"]%></h1>
+
+<table style="width:100%">
+  <tr>
+    <th>Nombre</th>
+    <th>Tipo</th>
+    <th>Dimensión</th>
+    <th>Residentes</th>
+  </tr>
+  <tr>
+    <td> <%= @response_location["name"] %> </td>
+    <td> <%=@response_location["type"]%> </td>
+    <td> <%=@response_location["dimension"]%> </td>
+    <td>
+      <%for elemento in @lista_info_characters do %>
+        <ul>
+          <li> <%= link_to elemento[1], character_show_info_path(elemento[0])%> </li>
+        </ul>
+      <% end %>
+    </td>
+  </tr>
+</table>

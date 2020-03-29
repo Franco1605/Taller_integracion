@@ -1,0 +1,39 @@
+<%=form_tag "search/create", method: :get do %>
+    <%=text_field_tag :keyword, nil, placeholder: "Ingresa alguna palabra"%>
+    <%=content_tag :button, type: :submit do%>
+      Buscar
+    <%end%>
+<%end%>
+
+<h1>Personaje: <%=@response_character["name"]%></h1>
+
+<table style="width:100%">
+  <tr>
+    <th>Foto</th>
+    <th>Nombre</th>
+    <th>Estado</th>
+    <th>Especie</th>
+    <th>Tipo</th>
+    <th>Género</th>
+    <th>Lugar de origen</th>
+    <th>Ubicación</th>
+    <th>Episodios en los que aparece</th>
+  </tr>
+  <tr>
+    <td> <img src=<%= @response_character["image"]%> > </td>
+    <td> <%= @response_character["name"] %> </td>
+    <td> <%=@response_character["status"]%> </td>
+    <td> <%=@response_character["species"]%> </td>
+    <td> <%=@response_character["type"]%> </td>
+    <td> <%=@response_character["gender"]%> </td>
+    <td> <%=link_to @response_character["origin"]["name"], location_show_info_path(@id_lugar_origen)%> </td>
+    <td> <%=link_to @response_character["location"]["name"], location_show_info_path(@id_ubicacion) %> </td>
+    <td>
+      <%for elemento in @lista_info_episodes do %>
+        <ul>
+          <li> <%= link_to elemento[1], episode_show_path(elemento[0])%> </li>
+        </ul>
+      <% end %>
+    </td>
+  </tr>
+</table>

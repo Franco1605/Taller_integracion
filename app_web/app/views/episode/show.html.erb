@@ -1,18 +1,24 @@
-<h1>Este es solo un capítulo</h1>
+
+<%=form_tag "search/create", method: :get do %>
+    <%=text_field_tag :keyword, nil, placeholder: "Ingresa alguna palabra"%>
+    <%=content_tag :button, type: :submit do%>
+      Buscar
+    <%end%>
+<%end%>
+
+<h1>Este capítulo se llama <%=@response_episode["name"]%></h1>
 
 <table style="width:100%">
   <tr>
-    <th>Id</th>
     <th>Código del Episodio</th>
-    <th>Personajes</th>
+    <th>Personajes que aparecen</th>
   </tr>
   <tr>
-    <td> <%= @response_episode["id"]%> </td>
     <td> <%= @response_episode["episode"]%> </td>
     <td>
-      <%for nombre in @lista_nombres_personajes do %>
+      <%for elemento in @lista_info_personajes do %>
         <ul>
-          <li> <%=nombre %> </li>
+          <li> <%= link_to elemento[1], character_show_info_path(elemento[0])%> </li>
         </ul>
       <% end %>
     </td>
