@@ -1,4 +1,15 @@
-<h1>Lugar: <%=@response_location["name"]%></h1>
+<div class=buscador>
+  <%=form_tag "/search/show", method: :get do %>
+      <%=text_field_tag :keyword, nil, placeholder: "Ingresa alguna palabra"%>
+      <%=content_tag :button, type: :submit do %>
+        <div class=button>Buscar </div>
+      <%end%>
+  <%end%>
+</div>
+
+<div class=title>
+  <h1>Lugar: <%=@response_location["name"]%></h1>
+</div>
 
 <table style="width:100%">
   <tr>

@@ -1,12 +1,16 @@
-
-<%=form_tag "/search/show", method: :get do %>
+<div class=buscador>
+  <%=form_tag "/search/show", method: :get do %>
     <%=text_field_tag :keyword, nil, placeholder: "Ingresa alguna palabra"%>
     <%=content_tag :button, type: :submit do %>
-      Buscar
+      <div class=button>Buscar </div>
     <%end%>
-<%end%>
+  <%end%>
+</div>
 
-<h1>Aplicación de Rick and Morty</h1>
+
+<div class=title>
+  <h1>Aplicación de Rick and Morty</h1>
+</div>
 
 
 <table style="width:100%">

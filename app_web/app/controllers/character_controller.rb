@@ -11,7 +11,15 @@ class CharacterController < ApplicationController
       par_id_episode.push(nombre_episode)
       @lista_info_episodes.push(par_id_episode)
     end
-    @id_lugar_origen=HTTP.get(@response_character["origin"]["url"]).parse["id"]
-    @id_ubicacion=HTTP.get(@response_character["location"]["url"]).parse["id"]
+    if @response_character["origin"]["name"]=="unknown"
+      @id_lugar_origen="No tiene lugar de origen asociado"
+    else
+      @id_lugar_origen=HTTP.get(@response_character["origin"]["url"]).parse["id"]
+    end
+    if @response_character["location"]["name"]=="unknown"
+      @id_lugar_ubicacion="No tiene ubicación actual"
+    else
+      @id_lugar_ubicacion=HTTP.get(@response_character["location"]["url"]).parse["id"]
+    end
   end
 end

@@ -1,12 +1,15 @@
-
-<%=form_tag "search/create", method: :get do %>
+<div class=buscador>
+  <%=form_tag "/search/show", method: :get do %>
     <%=text_field_tag :keyword, nil, placeholder: "Ingresa alguna palabra"%>
-    <%=content_tag :button, type: :submit do%>
-      Buscar
+    <%=content_tag :button, type: :submit do %>
+      <div class=button>Buscar </div>
     <%end%>
-<%end%>
+  <%end%>
+</div>
 
-<h1>Este capítulo se llama <%=@response_episode["name"]%></h1>
+<div class=title>
+  <h1>Capítulo: <%=@response_episode["name"]%></h1>
+</div>
 
 <table style="width:100%">
   <tr>

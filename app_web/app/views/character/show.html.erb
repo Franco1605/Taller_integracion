@@ -1,11 +1,15 @@
-<%=form_tag "search/create", method: :get do %>
-    <%=text_field_tag :keyword, nil, placeholder: "Ingresa alguna palabra"%>
-    <%=content_tag :button, type: :submit do%>
-      Buscar
-    <%end%>
-<%end%>
+<div class=buscador>
+  <%=form_tag "/search/show", method: :get do %>
+      <%=text_field_tag :keyword, nil, placeholder: "Ingresa alguna palabra"%>
+      <%=content_tag :button, type: :submit do %>
+        <div class=button>Buscar </div>
+      <%end%>
+  <%end%>
+</div>
 
-<h1>Personaje: <%=@response_character["name"]%></h1>
+<div class=title>
+  <h1>Personaje: <%=@response_character["name"]%></h1>
+</div>
 
 <table style="width:100%">
   <tr>
@@ -26,8 +30,20 @@
     <td> <%=@response_character["species"]%> </td>
     <td> <%=@response_character["type"]%> </td>
     <td> <%=@response_character["gender"]%> </td>
-    <td> <%=link_to @response_character["origin"]["name"], location_show_info_path(@id_lugar_origen)%> </td>
-    <td> <%=link_to @response_character["location"]["name"], location_show_info_path(@id_ubicacion) %> </td>
+    <td>
+      <%if @id_lugar_origen=="No tiene lugar de origen asociado"%>
+        <%= @id_lugar_origen%>
+      <%else%>
+        <%=link_to @response_character["origin"]["name"], location_show_info_path(@id_lugar_origen)%>
+      <%end%>
+    </td>
+    <td>
+      <%if @id_lugar_ubicacion=="No tiene ubicación actual"%>
+        <%= @id_lugar_ubicacion%>
+      <%else%>
+        <%=link_to @response_character["location"]["name"], location_show_info_path(@id_lugar_ubicacion) %>
+      <%end%>
+    </td>
     <td>
       <%for elemento in @lista_info_episodes do %>
         <ul>
