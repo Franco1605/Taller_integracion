@@ -23,9 +23,9 @@
     <td> <%=@response_location["type"]%> </td>
     <td> <%=@response_location["dimension"]%> </td>
     <td>
-      <%for elemento in @lista_info_characters do %>
+      <%@lista_info_characters.each do |clave, valor|%>
         <ul>
-          <li> <%= link_to elemento[1], character_show_info_path(elemento[0])%> </li>
+          <li> <%= link_to valor, character_show_info_path(clave)%> </li>
         </ul>
       <% end %>
     </td>

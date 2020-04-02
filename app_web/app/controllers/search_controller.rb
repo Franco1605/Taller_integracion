@@ -10,7 +10,7 @@ class SearchController < ApplicationController
     else
       num_pages=todos_los_episodios["info"]["pages"].to_i
       (1..num_pages).each do |n|
-        episode_page=HTTP.get("https://rickandmortyapi.com/api/episode?page=%d" % n).parse
+        episode_page=HTTP.get("https://rickandmortyapi.com/api/episode/?page=%d&name=%s" % [n, params[:keyword]]).parse
         for episode in episode_page["results"] do
           information=[]
           id_episode=episode["id"]
@@ -21,6 +21,7 @@ class SearchController < ApplicationController
           @lista_resultados.push(information)
         end
       end
+      puts @lista_resultados
     end
     todos_los_lugares=HTTP.get("https://rickandmortyapi.com/api/location/?name=" + params[:keyword]).parse
     if todos_los_lugares["error"]=="There is nothing here"
@@ -28,7 +29,7 @@ class SearchController < ApplicationController
     else
       num_pages=todos_los_lugares["info"]["pages"].to_i
       (1..num_pages).each do |n|
-        location_page=HTTP.get("https://rickandmortyapi.com/api/location?page=%d" % n).parse
+        location_page=HTTP.get("https://rickandmortyapi.com/api/location/?page=%d&name=%s" % [n, params[:keyword]]).parse
         for location in location_page["results"] do
           information=[]
           id_location=location["id"]
@@ -46,7 +47,7 @@ class SearchController < ApplicationController
     else
       num_pages=todos_los_personajes["info"]["pages"].to_i
       (1..num_pages).each do |n|
-        character_page=HTTP.get("https://rickandmortyapi.com/api/character/?page=%d" % n).parse
+        character_page=HTTP.get("https://rickandmortyapi.com/api/character/?page=%d&name=%s" % [n, params[:keyword]]).parse
         for character in character_page["results"] do
           information=[]
           id_character=character["id"]
