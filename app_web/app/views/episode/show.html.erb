@@ -14,10 +14,12 @@
 <table style="width:100%">
   <tr>
     <th>Código del Episodio</th>
+    <th>Fecha que estuvo en el aire</th>
     <th>Personajes que aparecen</th>
   </tr>
   <tr>
     <td> <%= @response_episode["episode"]%> </td>
+    <td> <%= @response_episode["air_date"]%> </td>
     <td>
       <%for elemento in @lista_info_personajes do %>
         <ul>
