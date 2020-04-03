@@ -21,9 +21,9 @@
     <td> <%= @response_episode["episode"]%> </td>
     <td> <%= @response_episode["air_date"]%> </td>
     <td>
-      <%for elemento in @lista_info_personajes do %>
+      <%for elemento in @personajes do%>
         <ul>
-          <li> <%= link_to elemento[1], character_show_info_path(elemento[0])%> </li>
+          <li> <%= link_to elemento["name"], character_show_info_path(elemento["id"])%> </li>
         </ul>
       <% end %>
     </td>

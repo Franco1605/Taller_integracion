@@ -31,25 +31,31 @@
     <td> <%=@response_character["type"]%> </td>
     <td> <%=@response_character["gender"]%> </td>
     <td>
-      <%if @id_lugar_origen=="No tiene lugar de origen asociado"%>
-        <%= @id_lugar_origen%>
+      <%if @respuesta=="No tiene un lugar de origen asociado"%>
+        <%= @respuesta%>
       <%else%>
-        <%=link_to @response_character["origin"]["name"], location_show_info_path(@id_lugar_origen)%>
+        <%=link_to @respuesta[1], location_show_info_path(@respuesta[0])%>
       <%end%>
     </td>
     <td>
-      <%if @id_lugar_ubicacion=="No tiene ubicación actual"%>
-        <%= @id_lugar_ubicacion%>
+      <%if @respuesta_2=="No tiene una ubicación asociada"%>
+        <%= @respuesta_2%>
       <%else%>
-        <%=link_to @response_character["location"]["name"], location_show_info_path(@id_lugar_ubicacion) %>
+        <%=link_to @respuesta_2[1], location_show_info_path(@respuesta_2[0])%>
       <%end%>
     </td>
     <td>
-      <%for elemento in @lista_info_episodes do %>
+      <%if @episodios.is_a?(Hash)%>
         <ul>
-          <li> <%= link_to elemento[1], episode_show_path(elemento[0])%> </li>
+          <li> <%= link_to @episodios["name"], episode_show_path(@episodios["id"])%> </li>
         </ul>
-      <% end %>
+      <%else%>
+        <%for elemento in @episodios do%>
+          <ul>
+            <li> <%= link_to elemento["name"], episode_show_path(elemento["id"])%> </li>
+          </ul>
+        <% end %>
+      <%end%>
     </td>
   </tr>
 </table>

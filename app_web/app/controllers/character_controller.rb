@@ -2,24 +2,30 @@
 class CharacterController < ApplicationController
   def show
     @response_character = HTTP.get("https://rickandmortyapi.com/api/character/%d" % params[:id]).parse
-    @lista_info_episodes=[]
+    lista_ids_episodes=[]
     for link_episode in @response_character["episode"] do
-      par_id_episode=[]
-      id_episode=HTTP.get(link_episode).parse["id"]
-      nombre_episode=HTTP.get(link_episode).parse["name"]
-      par_id_episode.push(id_episode)
-      par_id_episode.push(nombre_episode)
-      @lista_info_episodes.push(par_id_episode)
+      lista_ids_episodes.push(link_episode.scan(/\d+/))
     end
+    @episodios=HTTP.get("https://rickandmortyapi.com/api/episode/%s" % lista_ids_episodes.join(",")).parse
+
     if @response_character["origin"]["name"]=="unknown"
-      @id_lugar_origen="No tiene lugar de origen asociado"
+      @respuesta="No tiene un lugar de origen asociado"
     else
-      @id_lugar_origen=HTTP.get(@response_character["origin"]["url"]).parse["id"]
+      @respuesta=[]
+      lugar=HTTP.get(@response_character["origin"]["url"]).parse
+      id_lugar=lugar["id"]
+      nombre_lugar=lugar["name"]
+      @respuesta.push(id_lugar, nombre_lugar)
     end
+
     if @response_character["location"]["name"]=="unknown"
-      @id_lugar_ubicacion="No tiene ubicación actual"
+      @respuesta_2="No tiene una ubicación asociada"
     else
-      @id_lugar_ubicacion=HTTP.get(@response_character["location"]["url"]).parse["id"]
+      @respuesta_2=[]
+      lugar=HTTP.get(@response_character["location"]["url"]).parse
+      id_lugar=lugar["id"]
+      nombre_lugar=lugar["name"]
+      @respuesta_2.push(id_lugar, nombre_lugar)
     end
   end
 end

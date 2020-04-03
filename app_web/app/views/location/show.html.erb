@@ -23,11 +23,17 @@
     <td> <%=@response_location["type"]%> </td>
     <td> <%=@response_location["dimension"]%> </td>
     <td>
-      <%@lista_info_characters.each do |clave, valor|%>
+      <%if @personajes.is_a?(Hash)%>
         <ul>
-          <li> <%= link_to valor, character_show_info_path(clave)%> </li>
+          <li> <%= link_to @personajes["name"], character_show_info_path(@personajes["id"])%> </li>
         </ul>
-      <% end %>
+      <%else%>
+        <%for elemento in @personajes do%>
+          <ul>
+            <li> <%= link_to elemento["name"], character_show_info_path(elemento["id"])%> </li>
+          </ul>
+        <% end %>
+      <%end%>
     </td>
   </tr>
 </table>
