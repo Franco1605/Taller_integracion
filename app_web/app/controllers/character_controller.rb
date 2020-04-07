@@ -1,12 +1,12 @@
 # encoding: utf-8
 class CharacterController < ApplicationController
   def show
-    @response_character = HTTP.get("https://rickandmortyapi.com/api/character/%d" % params[:id]).parse
+    @response_character = HTTP.get("https://integracion-rick-morty-api.herokuapp.com/api/character/%d" % params[:id]).parse
     lista_ids_episodes=[]
     for link_episode in @response_character["episode"] do
       lista_ids_episodes.push(link_episode.scan(/\d+/))
     end
-    @episodios=HTTP.get("https://rickandmortyapi.com/api/episode/%s" % lista_ids_episodes.join(",")).parse
+    @episodios=HTTP.get("https://integracion-rick-morty-api.herokuapp.com/api/episode/%s" % lista_ids_episodes.join(",")).parse
 
     if @response_character["origin"]["name"]=="unknown"
       @respuesta="No tiene un lugar de origen asociado"
